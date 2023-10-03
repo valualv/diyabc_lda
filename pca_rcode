@@ -1,0 +1,120 @@
+setwd("/Users/valua/Desktop/ASAG_Project/pca_figures_man")
+library(cluster)
+library(ggplot2)
+install.packages("ggfortify")
+library(ggfortify)
+install.packages("factoextra")
+library(FactoMineR)
+library(factoextra)
+
+install.packages("svglite")
+library(svglite)
+install.packages("sjPlot")
+library(sjPlot)
+
+# code to recreate PCA plots from DIYABC using R base code
+
+## apriori models ##
+
+## cant figure out how to plot PCA with only two scenarios (1 axis), so just going to make those in inkscape
+## and make the >2 scenarios here
+
+# model set 1 #
+
+# read in the data
+
+ms2.apr<-read.csv("modset2_apriori.csv", header = TRUE)
+PC1.2<- as.data.frame(ms2.apr)
+head(PC1.2)
+PC1.2$scenario<-ms2.apr$scenario
+
+# making each scenario be a different color
+
+PC1.2$color=NA
+PC1.2$color[PC1.2$scenario==0]="firebrick3"
+PC1.2$color[PC1.2$scenario==1]="olivedrab3"
+PC1.2$color[PC1.2$scenario==2]="goldenrod"
+PC1.2$color[PC1.2$scenario==3]="orchid3"
+PC1.2$color[PC1.2$scenario==4]="darkblue"
+
+
+# mapping the PCA plot
+
+pca_1.2<- plot(PC1.2$val1,
+                 PC1.2$val2,
+                 col = PC1.2$color,
+                 pch = 19,
+                 main="Apriori 2",
+                 xlab="PC1",
+                 ylab="PC2")
+
+# a posterior models #
+# model set 3 #
+
+# read in the data
+
+ms3.apo<-read.csv("modset3_aposterior.csv", header = TRUE)
+PC2.3<- as.data.frame(ms3.apo)
+head(PC2.3)
+PC2.3$scenario<-ms3.apo$scenario
+
+# making each scenario be a different color
+
+PC2.3$color=NA
+PC2.3$color[PC2.3$scenario==0]="firebrick3"
+PC2.3$color[PC2.3$scenario==1]="olivedrab3"
+PC2.3$color[PC2.3$scenario==2]="goldenrod"
+PC2.3$color[PC2.3$scenario==3]="orchid3"
+PC2.3$color[PC2.3$scenario==4]="darkblue"
+
+# mapping the PCA plot
+
+pca_2.3<- plot(PC2.3$val1,
+               PC2.3$val2,
+               col = PC2.3$color,
+               pch = 19,
+               main="A posteriori 3",
+               xlab="PC1",
+               ylab="PC2")
+
+## model set 5
+
+ms5.apo<-read.csv("modset5_posterior.csv", header = TRUE)
+PC2.5<- as.data.frame(ms5.apo)
+head(PC2.5)
+PC2.5$scenario<-ms5.apo$scenario
+
+# making each scenario be a different color
+
+PC2.5$color=NA
+PC2.5$color[PC2.5$scenario==0]="firebrick3"
+PC2.5$color[PC2.5$scenario==1]="olivedrab3"
+PC2.5$color[PC2.5$scenario==2]="goldenrod"
+PC2.5$color[PC2.5$scenario==3]="orchid3"
+PC2.5$color[PC2.5$scenario==4]="darkblue"
+
+# mapping the PCA plot
+
+pca_2.5<- plot(PC2.5$val1,
+                 PC2.5$val2,
+                 col = PC2.5$color,
+                 pch = 19,
+                 main="A posteriori 5",
+                 xlab="PC1",
+                 ylab="PC2")
+
+#extract rgb to use in inkscape
+
+col2rgb("orange")
+col2rgb("darkred")
+col2rgb("lightblue")
+col2rgb("orange3")
+col2rgb("lightpink2")
+
+col2rgb("firebrick")
+col2rgb("olivedrab3")
+col2rgb("goldenrod")
+col2rgb("orchid3")
+col2rgb("darkblue")
+col2rgb("azure3")
+col2rgb("deepskyblue")
